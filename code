@@ -1,0 +1,114 @@
+var random;
+
+// list creations
+var status = getColumn("100 Birds of the World", "Conservation Status");
+var color = getColumn("100 Birds of the World", "Primary Color");
+var image = getColumn("100 Birds of the World", "Image of Bird");
+var name = getColumn("100 Birds of the World", "Name");
+
+var statusLeast = [];
+var leastName = [];
+var statusVulnerable = [];
+var vulnerableName = [];
+var statusEndangered = [];
+var endangeredName = [];
+
+var colorBlue = [];
+var blueName = [];
+var colorWhite = [];
+var whiteName = [];
+var colorYellow = [];
+var yellowName = [];
+
+//list updates
+for (var i = 0; i < 101; i++) {
+  if (status[i] == "Least Concern"){
+    appendItem(statusLeast, image[i]);
+    appendItem(leastName, name[i]);
+  }
+  if (status[i] == "Vulnerable"){
+    appendItem(statusVulnerable, image[i]);
+    appendItem(vulnerableName, name[i]);
+  }
+  if (status[i] == "Endangered"){
+    appendItem(statusEndangered, image[i]);
+    appendItem(endangeredName, name[i]);
+  }
+}
+
+for (var i = 0; i < 101; i++) {
+  if (color[i] == "Blue"){
+    appendItem(colorBlue, image[i]);
+    appendItem(blueName, name[i]);
+  }
+  if (color[i] == "White"){
+    appendItem(colorWhite, image[i]);
+    appendItem(whiteName, name[i]);
+  }
+  if (color[i] == "Yellow"){
+    appendItem(colorYellow, image[i]);
+    appendItem(yellowName, name[i]);
+  }
+}
+
+//page controls
+onEvent("beginButton", "click", function (){
+  setScreen("screen2");
+  sound();
+});
+onEvent("nextPage1", "click", function () {
+  setScreen("screen3");
+  sound();
+});
+onEvent("backPage1", "click", function () {
+  setScreen("screen1");
+  sound();
+});
+onEvent("backPage2", "click", function () {
+  setScreen("screen2");
+  sound();
+});
+//button results screen2
+onEvent("leastConcernButton", "click", function () {
+  random = randomNumber(statusLeast.length-1);
+  setImageURL("birdImage1", statusLeast[random]);
+  setText("name1", leastName[random]);
+  sound();
+});
+onEvent("vulnerableButton", "click", function () {
+  random = randomNumber(statusVulnerable.length-1);
+  setImageURL("birdImage1", statusVulnerable[random]);
+  setText("name1", vulnerableName[random]);
+  sound();
+});
+onEvent("endangeredButton", "click", function () {
+  random = randomNumber(statusEndangered.length-1);
+  setImageURL("birdImage1", statusEndangered[random]);
+  setText("name1", endangeredName[random]);
+  sound();
+});
+
+//button results screen3
+onEvent("blueButton", "click", function () {
+  random = randomNumber(colorBlue.length-1);
+  setImageURL("birdImage2", colorBlue[random]);
+  setText("name2", blueName[random]);
+  sound();
+});
+onEvent("whiteButton", "click", function () {
+  random = randomNumber(colorWhite.length-1);
+  setImageURL("birdImage2", colorWhite[random]);
+  setText("name2", whiteName[random]);
+  sound();
+});
+onEvent("yellowButton", "click", function () {
+  random = randomNumber(colorYellow.length-1);
+  setImageURL("birdImage2", colorYellow[random]);
+  setText("name2", yellowName[random]);
+  sound();
+});
+
+//function to play sound every time a button is clicked
+function sound () {
+  playSound("sound://category_app/app_interface_button_2.mp3", false);
+}
